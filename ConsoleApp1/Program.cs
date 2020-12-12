@@ -1,5 +1,6 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using ConsoleApp1.Model;
 
 namespace ConsoleApp1
@@ -38,6 +39,35 @@ namespace ConsoleApp1
 
             Console.WriteLine("Formatted text alligned right");
             list.PrintFormatted();
+
+            var map = new Dictionary<string, int>();
+            map.Add("qwe", 2);
+            */
+            
+            Marks formA = new Marks(72, "well", 63);
+            Marks formB = new Marks(94, "not bad", 87);
+            Marks formC = new Marks(72, "well", 63);
+            Marks formD = new Marks(94, "not bad", 87);
+            
+
+            Console.WriteLine(formA.GetHashCode());
+            Console.WriteLine(formB.GetHashCode());
+            Console.WriteLine(formC.GetHashCode());
+            Console.WriteLine(formD.GetHashCode());
+            
+            MyHashTable<int, Marks> markss = new MyHashTable<int, Marks>();
+            markss.Add(44, formA);
+            markss.Add(44, formA);
+            markss.Add(44, formA);
+            
+            MyHashTable<string, Marks> marks = new MyHashTable<string, Marks>();
+            marks.Add("Abasov Albert", formA);
+            marks.Add("Abasov Albert", formA);
+            marks.Add("Abasov Albert", formA);
+            marks.Add("Abasov Albert", formA);
+            marks.Add("Abasov Albert", formA);
+            marks.Add("Ivan Ivanov", formB);
+            
         }
     }
 }
