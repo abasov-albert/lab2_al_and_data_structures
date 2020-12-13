@@ -38,25 +38,28 @@ namespace ConsoleApp1.Model
 
             Entry newEntry = new Entry(k, v); // create new entry
             Entry existingEntry = _entries[indexBucket];
-
+            Entry previosEntry = existingEntry;
+            
             bool equals = false;
             if (existingEntry != null)
             {
-                while (existingEntry.Next != null) // while next value of existing entry is exist keep going
+                while (existingEntry != null) // while next value of existing entry is exist keep going
                 {
                     if (existingEntry.Key.Equals(newEntry.Key)) // in case of the same existing entry and new
                     {
                         equals = true;
                         break;
                     }
-
+                    
+                    previosEntry = existingEntry;
                     existingEntry = existingEntry.Next;
                 }
 
                 if (equals == true)
                     existingEntry = newEntry;
                 else
-                    existingEntry.Next = newEntry; // add entry to the end
+                    previosEntry.Next = newEntry; // add entry to the end
+               // existingEntry.Sort();
             }
             else
             {
@@ -71,20 +74,9 @@ namespace ConsoleApp1.Model
             // find bucket where could be this key
             int index = Math.Abs(k.GetHashCode() % TABLE_SIZE);
             var entry = _entries[index];
-
-            if (entry.Next == null)
-            {
-                
-                if (entry.Key.Equals(k))
-                {
-                    return entry.Value;
-                }
-
-                return default;
-            }
             
             // check each element while there are exist next
-            while (entry.Next != null) 
+            while (entry != null) 
             {
                 // compare keys of found entry and input key
                 if (entry.Key.Equals(k))
@@ -95,6 +87,24 @@ namespace ConsoleApp1.Model
             }
 
             return default;
+        }
+
+        public void Delete(TKey k)
+        {
+            int index = Math.Abs(k.GetHashCode() % TABLE_SIZE); 
+            var entry = _entries[index];
+            var previosEntry = entry;
+            while (entry != null)
+            {
+                if (entry.Key.Equals(k))
+                {
+                    previosEntry.Next = entry.Next;
+                    break;
+                }
+                
+                previosEntry = entry;
+                entry = entry.Next;
+            }
         }
     }
 }

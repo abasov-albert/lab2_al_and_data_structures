@@ -48,26 +48,22 @@ namespace ConsoleApp1
             Marks formC = new Marks(72, "well", 63);
             Marks formD = new Marks(94, "not bad", 87);
             
-
-            Console.WriteLine(formA.GetHashCode());
-            Console.WriteLine(formB.GetHashCode());
-            Console.WriteLine(formC.GetHashCode());
-            Console.WriteLine(formD.GetHashCode());
-            
-            MyHashTable<int, Marks> markss = new MyHashTable<int, Marks>();
-            markss.Add(44, formA);
-            markss.Add(44, formA);
-            markss.Add(44, formA);
-            
             MyHashTable<string, Marks> marks = new MyHashTable<string, Marks>();
             marks.Add("Abasov Albert", formA);
-            marks.Add("Abasov Albert", formA);
-            marks.Add("Abasov Albert", formA);
-            marks.Add("Abasov Albert", formA);
-            marks.Add("Abasov Albert", formA);
+            marks.Add("Lena", formB);
+            marks.Add("Rita", formC);
+            marks.Add("Valera", formD);
+            marks.Add("Denis", formA);
             marks.Add("Ivan Ivanov", formB);
 
-            Console.WriteLine(marks.Lookup("Ivan Ivanov"));
+            Console.WriteLine("Ivan Ivanov: " + marks.Lookup("Ivan Ivanov"));
+            Console.WriteLine("Lena: " + marks.Lookup("Lena"));
+            Console.WriteLine("Rita: " + marks.Lookup("Rita"));
+            Console.WriteLine("Valera: " + marks.Lookup("Valera"));
+            Console.WriteLine("Denis: " + marks.Lookup("Denis"));
+            Console.WriteLine("Kolya: " + marks.Lookup("Kolya"));
+            marks.Delete("Denis");
+            Console.WriteLine("Denis: " + marks.Lookup("Denis"));
             
         }
     }
