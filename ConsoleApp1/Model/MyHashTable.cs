@@ -1,11 +1,16 @@
+using System;
+using System.Collections.Generic;
+using System.Dynamic;
+using System.Linq;
+
 namespace ConsoleApp1.Model
 {
     public class MyHashTable<TKey, TValue>
     {
-        private const int TABLE_SIZE = 10; 
-        
-        private Entry[] _buckets;
-        private int _count; 
+        private const int TABLE_SIZE = 10;
+
+        private Entry[] _entries;
+        private int _count;
 
         private class Entry
         {
@@ -22,41 +27,74 @@ namespace ConsoleApp1.Model
 
         public MyHashTable()
         {
-            _buckets = new Entry[TABLE_SIZE];
+            _entries = new Entry[TABLE_SIZE];
             _count = 0;
         }
-        
+
         public void Add(TKey k, TValue v)
         {
-            var hashCode = k.GetHashCode();
-            int indexBucket = (hashCode + 1) % TABLE_SIZE;
-            Entry newEntry = new Entry(k, v);
-            Entry existingBucket = _buckets[indexBucket];
-            Entry currentBucket = existingBucket;
+            var hashCode = Math.Abs(k.GetHashCode()); // get hashcode
+            int indexBucket = hashCode % TABLE_SIZE; // get index of entry
+
+            Entry newEntry = new Entry(k, v); // create new entry
+            Entry existingEntry = _entries[indexBucket];
+
             bool equals = false;
-            if (existingBucket != null)
+            if (existingEntry != null)
             {
-                while (currentBucket.Next != null)
+                while (existingEntry.Next != null) // while next value of existing entry is exist keep going
                 {
-                    if (currentBucket.Equals(newEntry))
+                    if (existingEntry.Key.Equals(newEntry.Key)) // in case of the same existing entry and new
                     {
                         equals = true;
                         break;
                     }
-                    currentBucket = currentBucket.Next;
+
+                    existingEntry = existingEntry.Next;
                 }
 
                 if (equals == true)
-                    currentBucket = newEntry;
+                    existingEntry = newEntry;
                 else
-                    currentBucket.Next = newEntry;
+                    existingEntry.Next = newEntry; // add entry to the end
             }
             else
             {
-                _buckets[indexBucket] = newEntry;
+                _entries[indexBucket] = newEntry; // if bucket is empty add new entry
             }
 
             _count++;
+        }
+
+        public TValue Lookup(TKey k)
+        {
+            // find bucket where could be this key
+            int index = Math.Abs(k.GetHashCode() % TABLE_SIZE);
+            var entry = _entries[index];
+
+            if (entry.Next == null)
+            {
+                
+                if (entry.Key.Equals(k))
+                {
+                    return entry.Value;
+                }
+
+                return default;
+            }
+            
+            // check each element while there are exist next
+            while (entry.Next != null) 
+            {
+                // compare keys of found entry and input key
+                if (entry.Key.Equals(k))
+                {
+                    return entry.Value;
+                }
+                entry = entry.Next;
+            }
+
+            return default;
         }
     }
 }

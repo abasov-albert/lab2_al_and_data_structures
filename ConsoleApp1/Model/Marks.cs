@@ -21,7 +21,12 @@ namespace ConsoleApp1.Model
             hash = 3 * hash * PhysicsMark;
             return hash;
         }
-        
-        
+
+        public override string ToString()
+        {
+            return $"{nameof(MathMark)}: {MathMark}, " +
+                   $"{nameof(GeographyMark)}: {GeographyMark}, " +
+                   $"{nameof(PhysicsMark)}: {PhysicsMark}";
+        }
     }
 }

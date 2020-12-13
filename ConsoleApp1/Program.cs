@@ -9,6 +9,7 @@ namespace ConsoleApp1
     {
         public static void Main(string[] args)
         {
+            /*
             MyList<string> list = new MyList<string>();
             
             string text = System.IO.File.ReadAllText(@"/Users/oabasov/RiderProjects/ConsoleApp1/ConsoleApp1/Text.txt");
@@ -39,10 +40,8 @@ namespace ConsoleApp1
 
             Console.WriteLine("Formatted text alligned right");
             list.PrintFormatted();
-
-            var map = new Dictionary<string, int>();
-            map.Add("qwe", 2);
             */
+            
             
             Marks formA = new Marks(72, "well", 63);
             Marks formB = new Marks(94, "not bad", 87);
@@ -67,6 +66,8 @@ namespace ConsoleApp1
             marks.Add("Abasov Albert", formA);
             marks.Add("Abasov Albert", formA);
             marks.Add("Ivan Ivanov", formB);
+
+            Console.WriteLine(marks.Lookup("Ivan Ivanov"));
             
         }
     }
