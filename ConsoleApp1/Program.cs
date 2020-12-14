@@ -56,15 +56,36 @@ namespace ConsoleApp1
             marks.Add("Abasov Albert", formA);
             marks.Add("Ivan Ivanov", formB);
 
-            Console.WriteLine("Ivan Ivanov: " + marks.Lookup("Ivan Ivanov"));
-            Console.WriteLine("Lena: " + marks.Lookup("Lena"));
-            Console.WriteLine("Rita: " + marks.Lookup("Rita"));
-            Console.WriteLine("Valera: " + marks.Lookup("Valera"));
-            Console.WriteLine("Denis: " + marks.Lookup("Denis"));
-            Console.WriteLine("Kolya: " + marks.Lookup("Kolya"));
-            marks.Delete("Denis");
-            Console.WriteLine("Denis: " + marks.Lookup("Denis"));
+            /*
+            Console.WriteLine("Ivan Ivanov: " + marks.Get("Ivan Ivanov"));
+            Console.WriteLine("Lena: " + marks.Get("Lena"));
+            Console.WriteLine("Rita: " + marks.Get("Rita"));
+            Console.WriteLine("Valera: " + marks.Get("Valera"));
+            Console.WriteLine("Denis: " + marks.Get("Denis"));
+            Console.WriteLine("Kolya: " + marks.Get("Kolya"));
+            marks.Remove("Denis");
+            Console.WriteLine("Denis: " + marks.Get("Denis"));
+            */
+         
+            // tree
+            var myBinaryTree = new MyBinaryTree<int, string>();
+            myBinaryTree.Add(47, "Math");
+            myBinaryTree.Add(40, "Physics");
+            myBinaryTree.Add(22, "Biology");
+            myBinaryTree.Add(61, "English");
+            myBinaryTree.Add(9, "Geography");
+
+            Console.WriteLine(myBinaryTree.Get(47));
+            Console.WriteLine(myBinaryTree.Get(22));
+            Console.WriteLine(myBinaryTree.Get(9));
+            Console.WriteLine(myBinaryTree.Get(40));
+            Console.WriteLine(myBinaryTree.Get(61));
             
+            Console.WriteLine();
+
+            Console.WriteLine($"Maximum value is {myBinaryTree.GetMax()}");
         }
+        
+        
     }
 }

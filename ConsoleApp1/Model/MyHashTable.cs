@@ -18,10 +18,10 @@ namespace ConsoleApp1.Model
             public TValue Value { get; set; }
             public Entry Next { get; set; }
 
-            public Entry(TKey k, TValue v)
+            public Entry(TKey key, TValue value)
             {
-                this.Key = k;
-                this.Value = v;
+                this.Key = key;
+                this.Value = value;
             }
         }
 
@@ -31,12 +31,12 @@ namespace ConsoleApp1.Model
             _count = 0;
         }
 
-        public void Add(TKey k, TValue v)
+        public void Add(TKey key, TValue value)
         {
-            var hashCode = Math.Abs(k.GetHashCode()); // get hashcode
+            var hashCode = Math.Abs(key.GetHashCode()); // get hashcode
             int indexBucket = hashCode % TABLE_SIZE; // get index of entry
 
-            Entry newEntry = new Entry(k, v); // create new entry     
+            Entry newEntry = new Entry(key, value); // create new entry     
             Entry existingEntry = _entries[indexBucket]; 
             Entry previosEntry = existingEntry;  
 
@@ -82,17 +82,17 @@ namespace ConsoleApp1.Model
             _count++;
         }
 
-        public TValue Lookup(TKey k)
+        public TValue Get(TKey key)
         {
             // find bucket where could be this key
-            int index = Math.Abs(k.GetHashCode() % TABLE_SIZE);
+            int index = Math.Abs(key.GetHashCode() % TABLE_SIZE);
             var entry = _entries[index];
 
             // check each element while there are exist next
             while (entry != null)
             {
                 // compare keys of found entry and input key
-                if (entry.Key.Equals(k))
+                if (entry.Key.Equals(key))
                 {
                     return entry.Value;
                 }
@@ -103,14 +103,14 @@ namespace ConsoleApp1.Model
             return default;
         }
 
-        public void Delete(TKey k)
+        public void Remove(TKey key)
         {
-            int index = Math.Abs(k.GetHashCode() % TABLE_SIZE);
+            int index = Math.Abs(key.GetHashCode() % TABLE_SIZE);
             var entry = _entries[index];
             var previosEntry = entry;
             while (entry != null)
             {
-                if (entry.Key.Equals(k))
+                if (entry.Key.Equals(key))
                 {
                     previosEntry.Next = entry.Next;
                     break;
