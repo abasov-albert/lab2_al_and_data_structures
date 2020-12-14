@@ -49,11 +49,11 @@ namespace ConsoleApp1
             Marks formD = new Marks(94, "not bad", 87);
             
             MyHashTable<string, Marks> marks = new MyHashTable<string, Marks>();
-            marks.Add("Abasov Albert", formA);
             marks.Add("Lena", formB);
             marks.Add("Rita", formC);
             marks.Add("Valera", formD);
             marks.Add("Denis", formA);
+            marks.Add("Abasov Albert", formA);
             marks.Add("Ivan Ivanov", formB);
 
             Console.WriteLine("Ivan Ivanov: " + marks.Lookup("Ivan Ivanov"));
