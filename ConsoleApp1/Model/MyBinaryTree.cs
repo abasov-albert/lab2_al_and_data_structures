@@ -167,7 +167,14 @@ namespace ConsoleApp1.Model
                     }
                     else
                     {
-                        _previosNode.RightChild = mostLeftSuccessor;
+                        if (_currentNode == _previosNode.RightChild)
+                        {
+                            _previosNode.RightChild = mostLeftSuccessor;
+                        }
+                        else
+                        {
+                            _previosNode.LeftChild = mostLeftSuccessor;
+                        }
                     }
 
                     mostLeftSuccessor.LeftChild = _currentNode.LeftChild;
@@ -199,7 +206,7 @@ namespace ConsoleApp1.Model
                 node = node.LeftChild;
             }
 
-            parent.RightChild = node.RightChild;
+            parent.LeftChild = node.RightChild;
             return node;
         }
 
