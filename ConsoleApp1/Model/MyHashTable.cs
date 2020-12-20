@@ -107,12 +107,20 @@ namespace ConsoleApp1.Model
         {
             int index = Math.Abs(key.GetHashCode() % TABLE_SIZE);
             var entry = _entries[index];
-            var previosEntry = entry;
+            Entry previosEntry = null;
+            
             while (entry != null)
             {
                 if (entry.Key.Equals(key))
                 {
-                    previosEntry.Next = entry.Next;
+                    if (previosEntry == null)
+                    {
+                        _entries[index] = null;
+                    }
+                    else
+                    {
+                        previosEntry.Next = entry.Next;    
+                    }
                     break;
                 }
 

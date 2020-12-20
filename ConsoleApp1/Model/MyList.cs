@@ -19,6 +19,7 @@ namespace ConsoleApp1.Model
         public void Add(T value)
         {
             Element<T> elem = new Element<T>(value);
+            
             if (Tail != null)
             {
                 Tail.Next = elem;
