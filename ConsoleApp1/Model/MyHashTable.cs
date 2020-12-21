@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
+using System.Text;
 
 namespace ConsoleApp1.Model
 {
@@ -33,25 +34,25 @@ namespace ConsoleApp1.Model
 
         public void Add(TKey key, TValue value)
         {
-            var hashCode = Math.Abs(key.GetHashCode()); // get hashcode
-            int indexBucket = hashCode % TABLE_SIZE; // get index of entry
+            var hashCode = Math.Abs(key.GetHashCode()); 
+            int indexBucket = hashCode % TABLE_SIZE; 
 
-            Entry newEntry = new Entry(key, value); // create new entry     
+            Entry newEntry = new Entry(key, value);      
             Entry existingEntry = _entries[indexBucket]; 
             Entry previosEntry = existingEntry;  
 
             bool equals = false;
             if (existingEntry != null)
             {
-                while (existingEntry != null) // while next value of existing entry is exist keep going
+                while (existingEntry != null) 
                 {
-                    if (existingEntry.Key.Equals(newEntry.Key)) // in case of the same existing entry and new
+                    if (existingEntry.Key.Equals(newEntry.Key)) 
                     {
                         equals = true;
                         break;
                     }
 
-                    if (newEntry.Key.CompareTo(existingEntry.Key) < 0) // newEntry.key < existing.key
+                    if (newEntry.Key.CompareTo(existingEntry.Key) < 0) 
                     {
                         newEntry.Next = existingEntry; 
                         break;
@@ -84,7 +85,6 @@ namespace ConsoleApp1.Model
 
         public TValue Get(TKey key)
         {
-            // find bucket where could be this key
             int index = Math.Abs(key.GetHashCode() % TABLE_SIZE);
             var entry = _entries[index];
 
@@ -115,7 +115,7 @@ namespace ConsoleApp1.Model
                 {
                     if (previosEntry == null)
                     {
-                        _entries[index] = null;
+                        _entries[index] = entry.Next;
                     }
                     else
                     {
@@ -127,6 +127,32 @@ namespace ConsoleApp1.Model
                 previosEntry = entry;
                 entry = entry.Next;
             }
+        }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("[");
+            sb.Append("\n");
+            
+            for (int i = 0; i < _entries.Length; i++)
+            {
+                var curEntry = _entries[i];
+                if (curEntry == null)
+                {
+                    continue;
+                }
+
+                do
+                {
+                    sb.Append($"Key = [{curEntry.Key}], Value = [{curEntry.Value}] \n");
+                    curEntry = curEntry.Next;
+                } while (curEntry != null);
+            }
+            
+            sb.Append("]");
+            
+            return sb.ToString();
         }
     }
 }

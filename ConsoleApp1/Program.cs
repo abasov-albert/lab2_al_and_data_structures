@@ -9,9 +9,9 @@ namespace ConsoleApp1
         {
             // TestLinkedList();
             
-            TestHashTable();
+             TestHashTable();
             
-            // TestTree();
+            //TestTree();
         }
         
         private static void TestLinkedList()
@@ -60,6 +60,9 @@ namespace ConsoleApp1
             Student student2 = new Student("Ivan", "Ivanov", 2);
             Student student3 = new Student("Petr", "Petrov", 3);
             Student student4 = new Student("Sydor", "Sydorov", 4);
+            Student student5 = new Student("Maxim", "Sydorov", 7);
+            
+            
             
 
             MyHashTable<Student, Grades> studentToGrades = new MyHashTable<Student, Grades>();
@@ -67,21 +70,28 @@ namespace ConsoleApp1
             studentToGrades.Add(student2, grade2);
             studentToGrades.Add(student3, grade3);
             studentToGrades.Add(student4, grade4);
+            studentToGrades.Add(student4, grade4);
+            studentToGrades.Add(student5, grade1);
 
             Console.WriteLine("Ivan Ivanov: " + studentToGrades.Get(student2));
             Console.WriteLine("Vladislav Vladislavov: " + studentToGrades.Get(student1));
             Console.WriteLine("Petr Petrov: " + studentToGrades.Get(student3));
             Console.WriteLine("Sydor Sydorov: " + studentToGrades.Get(student4));
-            
+
+            Console.WriteLine("Hash Table:");
+            Console.WriteLine(studentToGrades.ToString());
+
             studentToGrades.Remove(student3);
             Console.WriteLine();
             Console.WriteLine("Petr Petrov: " + studentToGrades.Get(student3));
+            Console.WriteLine("Maxim: " + studentToGrades.Get(student5));
+
+            Console.WriteLine();
+            Console.WriteLine(studentToGrades.ToString());
         }
         
         private static void TestTree()
         {
-            //  tree
-
             var myBinaryTree = new MyBinaryTree<int, string>();
             myBinaryTree.Add(47, "Math");
             myBinaryTree.Add(40, "Physics");

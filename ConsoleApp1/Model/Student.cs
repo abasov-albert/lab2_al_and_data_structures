@@ -37,5 +37,10 @@ namespace ConsoleApp1.Model
             this.surname = surname;
             this.grade = grade;
         }
+
+        public override string ToString()
+        {
+            return $"{nameof(name)}: {name}, {nameof(surname)}: {surname}, {nameof(grade)}: {grade}";
+        }
     }
 }
